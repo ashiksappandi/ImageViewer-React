@@ -1,11 +1,5 @@
-.header{
-    background: #263238;
-    padding: 15px;
-}
-
-.hdr-logo{
-    color: #FFFFFF;
-    font-size: 18px;
+.main-content{
+    margin-top: 150px;
 }
 
 .card{
