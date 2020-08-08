@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import MenuItem from "@material-ui/core/MenuItem";
 import Link from "@material-ui/core/Link";
-import UserAvatar from "../assets/logo.jpg";
+import UserAvatar from "../../assets/logo.jpg";
 
 class Header extends Component{
 
@@ -55,7 +55,7 @@ class Header extends Component{
                             <div className='searchIcon'>
                                 <SearchIcon />
                             </div>
-                            <InputBase onChange={(e)=>{this.props.searchHandler(e.target.value)}} placeholder="Search…" className="inputInput" classes={'inputInput'}/>
+                            <InputBase onChange={(e)=>{this.props.searchHandler(e.target.value)}} placeholder="Search…" className="inputInput"/>
                         </div>
                         }
                         {(screen === "Home" || screen === "Profile")  &&
