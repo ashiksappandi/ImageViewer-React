@@ -9,9 +9,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIconBorder from '@material-ui/icons/FavoriteBorder';
+import FavoriteIconFill from '@material-ui/icons/Favorite';
 import {constants} from "../../common/utils";
 import UserAvatar from "../../assets/logo.jpg";
+import Divider from "@material-ui/core/Divider";
 
 class Home extends Component{
 
@@ -64,6 +66,7 @@ class Home extends Component{
                 return response.json();
             }).then((jsonResponse) =>{
                 jsonResponse.caption = post.caption;
+                jsonResponse.likes = Math.floor(Math.random() * 10);
                 that.setState({
                     postDetails:jsonResponse,
                 })
@@ -95,6 +98,18 @@ class Home extends Component{
         this.props.history.push('/profile');
     }
 
+    onLikeClicked = (id) => {
+        if (this.state.isLiked) {
+            this.setState({
+                isLiked:false
+            });
+        }else {
+            this.setState({
+                isLiked:true
+            });
+        }
+    }
+
     render() {
         return(
             <div>
@@ -121,15 +136,24 @@ class Home extends Component{
                             image={item.media_url}
                             title={item.caption}
                         />
+                        <Divider variant="middle" className="divider-line"/>
                         <CardContent>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                {item.caption}
+                                {item.caption.replace(/#[a-z]+/gi,'')}
+                            </Typography>
+                            <Typography variant="body2" className="hashtags" component="p">
+                                {
+                                    item.caption.toString().match(/#[a-z]+/gi) ?
+                                        item.caption.toString().match(/#[a-z]+/gi).toString().replace(/,+/g, ' ') : ''
+                                }
                             </Typography>
                         </CardContent>
                         <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
+                            <IconButton aria-label="add to favorites" onClick={this.onLikeClicked.bind(this,item.id)}>
+                                {this.state.isLiked && <FavoriteIconFill style={{color:'#F44336'}}/>}
+                                {!this.state.isLiked && <FavoriteIconBorder/>}
                             </IconButton>
+                            <span className="post-likes">{item.likes} likes</span>
                         </CardActions>
                     </Card>
                     ))}
