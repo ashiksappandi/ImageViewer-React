@@ -67,6 +67,7 @@ class Home extends Component{
             }).then((jsonResponse) =>{
                 jsonResponse.caption = post.caption;
                 jsonResponse.likes = Math.floor(Math.random() * 10);
+                jsonResponse.liked = false;
                 that.setState({
                     postDetails:jsonResponse,
                 })
@@ -99,16 +100,25 @@ class Home extends Component{
     }
 
     onLikeClicked = (id) => {
-        if (this.state.isLiked) {
+        let likedPost = this.state.allPostDetails.find((post) => {
+            return post.id === id;
+        });
+
+        if (likedPost.liked) {
             this.setState({
-                isLiked:false
+                isLiked:false,
             });
+            likedPost.liked = false;
+            likedPost.likes--;
         }else {
             this.setState({
                 isLiked:true
             });
+            likedPost.liked = true;
+            likedPost.likes++;
         }
     }
+
 
     render() {
         return(
@@ -150,8 +160,8 @@ class Home extends Component{
                         </CardContent>
                         <CardActions disableSpacing>
                             <IconButton aria-label="add to favorites" onClick={this.onLikeClicked.bind(this,item.id)}>
-                                {this.state.isLiked && <FavoriteIconFill style={{color:'#F44336'}}/>}
-                                {!this.state.isLiked && <FavoriteIconBorder/>}
+                                { item.liked && <FavoriteIconFill style={{color:'#F44336'}}/>}
+                                {!item.liked && <FavoriteIconBorder/>}
                             </IconButton>
                             <span className="post-likes">{item.likes} likes</span>
                         </CardActions>
