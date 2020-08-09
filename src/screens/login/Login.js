@@ -1,4 +1,4 @@
-import React, {Component as that, Component} from "react";
+import React, {Component} from "react";
 import './Login.css';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';

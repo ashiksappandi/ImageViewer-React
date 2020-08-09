@@ -24,7 +24,8 @@ class Home extends Component{
         this.state = {
             allPostsId: [],
             postDetails: {},
-            allPostDetails: []
+            allPostDetails: [],
+            filteredPostDetails: [],
         }
     }
 
@@ -67,11 +68,23 @@ class Home extends Component{
                     postDetails:jsonResponse,
                 })
                 that.state.allPostDetails.push(that.state.postDetails);
+                that.state.filteredPostDetails.push(that.state.postDetails);
             }).catch((error) => {
                 console.log('error user data',error);
             });
 
         })
+    }
+
+    onSearchEntered = (value) =>{
+        let newFilteredData = [];
+        this.state.allPostDetails.filter(post => post.caption.toString().toLowerCase().includes(value)).map(newFilterPost => (
+            newFilteredData.push(newFilterPost)
+        ))
+        this.setState({
+            filteredPostDetails:newFilteredData
+        })
+console.log(this.state.filteredPostDetails)
     }
 
     render() {
@@ -84,7 +97,7 @@ class Home extends Component{
 
                 <div className='card-main-content'>
 
-                    {this.state.allPostDetails.map(item => (
+                    {this.state.filteredPostDetails.map(item => (
                         <Card className="card-root" key={item.id}>
                         <CardHeader
                             avatar={
