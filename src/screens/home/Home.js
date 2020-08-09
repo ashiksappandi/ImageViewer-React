@@ -84,7 +84,15 @@ class Home extends Component{
         this.setState({
             filteredPostDetails:newFilteredData
         })
-console.log(this.state.filteredPostDetails)
+    }
+
+    logout = () => {
+        sessionStorage.clear();
+        this.props.history.replace('/');
+    }
+
+    navigateToAccount = () =>{
+        this.props.history.push('/profile');
     }
 
     render() {
