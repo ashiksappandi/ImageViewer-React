@@ -1,4 +1,4 @@
-import React, {Component as that, Component} from "react";
+import React, {Component} from "react";
 import './Login.css';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,7 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Header from '../../common/Header'
+import Header from '../../common/header/Header'
+import {constants as Constants} from "../../common/utils";
 
 class Login extends Component{
 
@@ -46,21 +47,25 @@ class Login extends Component{
         let dft_password = 'admin';
 
         if (this.state.username === dft_username && this.state.password === dft_password) {
-            sessionStorage.setItem('access-token', 'IGQVJVeXA5Q3I4aHU0RmNlbUl4VHR0cW0yQkQyQmd1OWNkYzJOVGd5ZA0M0aHFXSUZAlZAmNMMWNobGxGWXh0TVp3MjhzT2p6eEE3NVBsZA29HMDJaU256eGJVekpRZAk1zWDl4VFFvRzc5eTFDZAm1tSEJFWWVROGIzTlZAHaFZAr');
+            sessionStorage.setItem('access-token', Constants.access_token);
             this.setState({loggedIn: true});
             this.setState({wrongCredential: "dispNone"});
+            this.navigateToHome();
         }
         else {
             this.setState({wrongCredential: "dispBlock"});
         }
     }
 
+    navigateToHome = () =>{
+        this.props.history.push('/home');
+    }
 
     render() {
         return (
             <div>
                 <Header screen={"Login"}/>
-                <body className="main-content">
+                <div className="main-content">
                 <Card className='card login-card'>
                     <CardContent>
                         <Typography variant="h5" component="h2" className='card-title login-card-title'>
@@ -82,7 +87,7 @@ class Login extends Component{
                         <Button variant="contained" color="primary" onClick={this.loginClickHandler}>LOGIN</Button>
                     </CardActions><br></br>
                 </Card>
-                </body>
+                </div>
             </div>
         );
     }
