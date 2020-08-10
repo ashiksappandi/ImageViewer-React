@@ -22,3 +22,16 @@
 .hashtags{
     color: dodgerblue;
 }
+
+.comment-section{
+    padding: 0px 10px 10px;
+    width: 100%;
+}
+
+.comment-input{
+    width: 80%;
+}
+
+.comment-button{
+    margin: 12px 10px 0 20px !important;
+}
