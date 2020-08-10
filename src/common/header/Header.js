@@ -8,7 +8,7 @@ import Popover from "@material-ui/core/Popover";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import MenuItem from "@material-ui/core/MenuItem";
-import Link from "@material-ui/core/Link";
+import { Link } from 'react-router-dom';
 import UserAvatar from "../../assets/logo.jpg";
 
 class Header extends Component {
