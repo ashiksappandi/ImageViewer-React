@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from "@material-ui/core/FormHelperText";
+import Header from '../../common/Header'
 
 class Login extends Component{
 
@@ -41,8 +42,8 @@ class Login extends Component{
             return
         }
 
-        let dft_username = 'username';
-        let dft_password = 'password';
+        let dft_username = 'admin';
+        let dft_password = 'admin';
 
         if (this.state.username === dft_username && this.state.password === dft_password) {
             sessionStorage.setItem('access-token', 'IGQVJVeXA5Q3I4aHU0RmNlbUl4VHR0cW0yQkQyQmd1OWNkYzJOVGd5ZA0M0aHFXSUZAlZAmNMMWNobGxGWXh0TVp3MjhzT2p6eEE3NVBsZA29HMDJaU256eGJVekpRZAk1zWDl4VFFvRzc5eTFDZAm1tSEJFWWVROGIzTlZAHaFZAr');
@@ -52,41 +53,14 @@ class Login extends Component{
         else {
             this.setState({wrongCredential: "dispBlock"});
         }
-
-
-        /*        let that = this;
-                let dataLogin = null
-
-                let xhrLogin = new XMLHttpRequest();
-                xhrLogin.addEventListener("readystatechange", function () {
-                    if (this.readyState === 4) {
-                        console.log(xhrLogin.getResponseHeader('access-token'));
-
-                        sessionStorage.setItem('uuid', JSON.parse(this.responseText).id);
-                        sessionStorage.setItem('access-token', xhrLogin.getResponseHeader('access-token'));
-
-                        that.setState({ loggedIn: true });
-                        that.closeModalHandler();
-                    }
-                })
-
-
-                xhrLogin.open("POST", this.props.baseUrl + "auth/login");
-                xhrLogin.setRequestHeader("Authorization", "Basic " + window.btoa(this.state.username + ":" + this.state.password));
-                xhrLogin.setRequestHeader("Content-Type", "application/json");
-                xhrLogin.setRequestHeader("Cache-Control", "no-cache");
-                xhrLogin.send(dataLogin);
-        */
-
     }
+
 
     render() {
         return (
             <div>
-                <header className='header'>
-                    <span className='hdr-logo'>Image Viewer</span>
-                </header>
-                <body>
+                <Header screen={"Login"}/>
+                <body className="main-content">
                 <Card className='card login-card'>
                     <CardContent>
                         <Typography variant="h5" component="h2" className='card-title login-card-title'>
